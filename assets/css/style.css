@@ -1,0 +1,24 @@
+.content pre{
+	padding: 0.8em 0.8em;
+}
+
+.section {
+    padding: 1rem 1rem;
+}
+.actions {
+	padding-bottom: 8px;
+	padding-top: 8px;
+}
+button{
+	margin-left: 4px;
+}
+
+.tabSpace2{
+	tab-size: 2;
+}
+.tabSpace3{
+	tab-size: 3;
+}
+.tabSpace4{
+	tab-size: 4;
+}

@@ -1,0 +1,96 @@
+<html>
+<head>
+	<script src="assets/js/formatter.js"></script>
+	<script src="assets/js/json2xml.js"></script>
+	<script src="assets/js/xml2json.js"></script>
+	<script src="assets/js/formatXML.js"></script>
+	<link rel="stylesheet" type="text/css" href="assets/css/bulma.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+
+			$('#jsonSubmit').bind('click', function() {
+				var input = $('#input').val();
+				//input.replace(/[\s\n]+/g, ' ')
+				var formattedJSONString = JSONFormat(input.replace(/[\s\n]+/g, ' '));
+				$('#output').html(formattedJSONString);
+			});
+
+
+			 $("#select-tab-space").on('change', function() {
+			  	$("#output").attr('class', 'tabSpace'+this.value);
+			});
+
+			 $("#select-convert").on('change', function() {
+
+			 	if(this.value == 1){
+					var input = $('#input').val();
+					var formattedJSONString = JSONFormat(input.replace(/[\s\n]+/g, ' '));
+					$('#output').html(formattedJSONString);
+			 	}
+			 	if(this.value == 2){
+					$("#output").text(formatXml(json2xml($.parseJSON($('#input').val()),"")));
+			 	}
+			});
+
+			 $("#input-clear").on('click', function() {
+			  	$("#input").val("");
+			});
+
+
+			$("#input-json2xml").on('click', function() {
+			  	//$('#output').html(formattedJSONString);
+			  	$("#output").text(formatXml(json2xml($.parseJSON($('#input').val()),"")));
+			});
+
+
+		});		
+
+	</script>
+	
+</head>
+<body>
+	<div class="section">
+		<div class="content">
+			<h3 id="header">Formatter Now</h3>
+			<textarea class="textarea" id="input" style="width:100%;" placeholder="Enter the content here..."></textarea>	
+
+			<div class="actions">
+				<div class="level-right" title="level-right">
+					
+					<div class="select">
+					  <select id="select-convert">
+					    <option value="1">JSON to JSON</option>
+					    <option value="2">JSON to XML</option>
+					  </select>
+					</div>
+
+					<div class="select">
+					  <select id="select-tab-space">
+					    <option value="2">2 Tab Space</option>
+					    <option value="3">3 Tab Space</option>
+					    <option value="4">4 Tab Space</option>
+					  </select>
+					</div>
+
+					<button id="input-clear" class="button">
+						Clear
+					</button>
+
+					<p>
+					<button class="button is-link" id="jsonSubmit">
+						Make a magic 
+					</button>
+				</p>
+				</div>
+			</div>
+
+			<div style="position:fixed; bottom: 10px; right: 10px; float:right;" >
+				<h3><a href="#header">Back to top</a></h3>
+			</div>
+			<pre class="tabSpace2" id="output"></pre>
+		</div>
+	</div>
+</body>
+</html>

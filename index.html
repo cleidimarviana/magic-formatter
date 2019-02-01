@@ -1,4 +1,5 @@
 <html>
+
 <head>
 	<script src="assets/js/formatter.js"></script>
 	<script src="assets/js/json2xml.js"></script>
@@ -7,10 +8,10 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/bulma.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<script type="text/javascript">
-		$(document).ready(function() {
+		$(document).ready(function () {
 
 
-			$('#jsonSubmit').bind('click', function() {
+			$('#jsonSubmit').bind('click', function () {
 				var input = $('#input').val();
 				//input.replace(/[\s\n]+/g, ' ')
 				try {
@@ -24,62 +25,57 @@
 					var data = "data:text/json;charset=utf-8," + encodeURIComponent(formattedJSONString);
 
 					var btnDownload = $("#download");
-					if(btnDownload!==null)
+					if (btnDownload !== null)
 						btnDownload.remove();
 
-					$(".actions-pre").append('<a class="button is-small" href="data:'+data+'" id="download" download="rabbit.json" data-tooltip="tooltip"  data-placement="bottom" title="Download JSON" innerHTML="download" class="export">Download</a>'); 
+					$(".actions-pre").append('<a class="button is-small" href="data:' + data + '" id="download" download="rabbit.json" data-tooltip="tooltip"  data-placement="bottom" title="Download JSON" innerHTML="download" class="export">Download</a>');
 
 				}
 				catch (err) {
 					$('#outputResult').addClass('hidden');
 					$('#output').empty();
-				  // Do something about the exception here
-				  $('#magicWarning').html("<div class='json-warning'>"+err+" | Expecting 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '[', got 'undefined'. Something wrong is not right. The rabbit did not get out of the hat in time.</div>");
+					// Do something about the exception here
+					$('#magicWarning').html("<div class='json-warning'>" + err + " | Expecting 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '[', got 'undefined'. Something wrong is not right. The rabbit did not get out of the hat in time.</div>");
 				}
 			});
 
 
-			$("#select-tab-space").on('change', function() {
-				$("#output").attr('class', 'tabSpace'+this.value);
+			$("#select-tab-space").on('change', function () {
+				$("#output").attr('class', 'tabSpace' + this.value);
 			});
 
-			$("#select-convert").on('change', function() {
+			$("#select-convert").on('change', function () {
 
-				if(this.value == 1){
+				if (this.value == 1) {
 					var input = $('#input').val();
 					var formattedJSONString = JSONFormat(input.replace(/[\s\n]+/g, ' '));
 					$('#output').html(formattedJSONString);
 				}
-				if(this.value == 2){
-					$("#output").text(formatXml(json2xml($.parseJSON($('#input').val()),"")));
+				if (this.value == 2) {
+					$("#output").text(formatXml(json2xml($.parseJSON($('#input').val()), "")));
 				}
 			});
 
-			$("#input-clear").on('click', function() {
+			$("#input-clear").on('click', function () {
 				$("#input").val("");
 			});
 
-			$("#input-json2xml").on('click', function() {
-			  	//$('#output').html(formattedJSONString);
-			  	$("#output").text(formatXml(json2xml($.parseJSON($('#input').val()),"")));
-			  });
+			$("#input-json2xml").on('click', function () {
+				//$('#output').html(formattedJSONString);
+				$("#output").text(formatXml(json2xml($.parseJSON($('#input').val()), "")));
+			});
 
-			$("#btn-copyclipboard").on('click', function() {			  	
+			$("#btn-copyclipboard").on('click', function () {
 				clip(document.getElementById("output"));
 			});
 
-			$("#btn-minify").on('click', function() {	
-				var minified = JSON.stringify(JSON.parse(document.getElementById("output").innerHTML));		  	
+			$("#btn-minify").on('click', function () {
+				var minified = JSON.stringify(JSON.parse(document.getElementById("output").innerHTML));
 				$('#output').html(minified);
 			});
+		});
 
-			
-
-
-
-		});		
-
-		var clip = function(el) {
+		var clip = function (el) {
 			var range = document.createRange();
 			range.selectNodeContents(el);
 			var sel = window.getSelection();
@@ -90,39 +86,38 @@
 			sel.removeAllRanges();
 		};
 	</script>
-	
+
 </head>
+
 <body>
 	<div class="section">
 		<div class="content">
 			<h3 id="header">MagicFormatter</h3>
-			<textarea class="textarea" id="input" style="width:100%;" placeholder="Enter the content here..."></textarea>	
+			<span style="font-size: 12px"> Enter your JSON here to see the magic happen: (Your code will NOT be posted anywhere because the program will run in client mode).</span>
+			<textarea class="textarea" id="input" style="width:100%;" placeholder="Enter the content here..."></textarea>
 
 			<div class="actions">
-				<div class="level-right" title="level-right">
-					
-					<button id="input-clear" class="button is-small">
-						Clear
-					</button>
 
-						<button class="button is-link is-small" id="jsonSubmit">
-							Make a magic 
-						</button>
-					
-				</div>
+				<button class="button is-link is-small" id="jsonSubmit">
+					Make a magic
+				</button>
+
+				<button id="input-clear" class="button is-small">
+					Clear
+				</button>
 			</div>
 
-			<div style="position:fixed; bottom: 10px; right: 10px; float:right;" >
-				<a  href="#header">BACK TO TOP</a>
+			<div style="position:fixed; bottom: 10px; right: 10px; float:right;">
+				<a href="#header">BACK TO TOP</a>
 			</div>
 			<div id="magicWarning"></div>
 
-			<div class="hidden" id="outputResult" >
+			<div class="hidden" style="overflow: auto;" id="outputResult">
 				<pre class="tabSpace2" id="output"></pre>
 
 				<div class="actions-pre">
 					<button class="button is-link output is-small" id="btn-copyclipboard">
-						Copy to clipboard 
+						Copy to clipboard
 					</button>
 					<div class="select is-small">
 						<select id="select-convert">
@@ -146,4 +141,5 @@
 		</div>
 	</div>
 </body>
+
 </html>

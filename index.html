@@ -13,8 +13,24 @@
 			$('#jsonSubmit').bind('click', function() {
 				var input = $('#input').val();
 				//input.replace(/[\s\n]+/g, ' ')
-				var formattedJSONString = JSONFormat(input.replace(/[\s\n]+/g, ' '));
-				$('#output').html(formattedJSONString);
+				try {
+					var c = $.parseJSON(input);
+					$('#magicWarning').empty();
+					var formattedJSONString = JSONFormat(input.replace(/[\s\n]+/g, ' '));
+
+					$('#outputResult').removeClass('hidden');
+					$('#output').html(formattedJSONString);
+
+					var data = "data:text/json;charset=utf-8," + encodeURIComponent(formattedJSONString);
+					$(".actions-pre").append('<a class="button" href="data:'+data+'" id="download" download="rabbit.json" data-tooltip="tooltip"  data-placement="bottom" title="Download JSON" innerHTML="download" class="export">Download</a>'); 
+
+				}
+				catch (err) {
+					$('#outputResult').addClass('hidden');
+					$('#output').empty();
+				  // Do something about the exception here
+				  $('#magicWarning').html("<div class='json-warning'>"+err+" | Expecting 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '[', got 'undefined'. Something wrong is not right. The rabbit did not get out of the hat in time.</div>");
+				}
 			});
 
 
@@ -73,6 +89,29 @@
 			<div class="actions">
 				<div class="level-right" title="level-right">
 					
+					<button id="input-clear" class="button">
+						Clear
+					</button>
+
+						<button class="button is-link" id="jsonSubmit">
+							Make a magic 
+						</button>
+					
+				</div>
+			</div>
+
+			<div style="position:fixed; bottom: 10px; right: 10px; float:right;" >
+				<h3><a href="#header">Back to top</a></h3>
+			</div>
+			<div id="magicWarning"></div>
+
+			<div class="hidden" id="outputResult" >
+				<pre class="tabSpace2" id="output"></pre>
+
+				<div class="actions-pre">
+					<button class="button is-link output" id="btn-copyclipboard">
+						Copy to clipboard 
+					</button>
 					<div class="select">
 						<select id="select-convert">
 							<option value="1">JSON to JSON</option>
@@ -87,28 +126,7 @@
 							<option value="4">4 Tab Space</option>
 						</select>
 					</div>
-
-					<button id="input-clear" class="button">
-						Clear
-					</button>
-
-					<p>
-						<button class="button is-link" id="jsonSubmit">
-							Make a magic 
-						</button>
-					</p>
 				</div>
-			</div>
-
-			<div style="position:fixed; bottom: 10px; right: 10px; float:right;" >
-				<h3><a href="#header">Back to top</a></h3>
-			</div>
-			<pre class="tabSpace2" id="output"></pre>
-
-			<div class="actions-pre">
-				<button class="button is-link output" id="btn-copyclipboard">
-					Copy to clipboard 
-				</button>
 			</div>
 		</div>
 	</div>

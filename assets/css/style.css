@@ -1,5 +1,10 @@
+#output, .textarea{
+	font-size: 0.85rem;
+}
+
 .content pre{
 	padding: 0.8em 0.8em;
+	max-height: 500px;
 }
 
 .section {
@@ -22,3 +27,13 @@ button{
 .tabSpace4{
 	tab-size: 4;
 }
+
+#magicWarning .json-warning{
+	border: 1px solid #ff0e0c;
+	color: #ff0e0c;
+	padding: 4px;
+	border-radius: 4px;
+}
+
+.hidden { display: none; }
+

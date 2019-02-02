@@ -2,15 +2,15 @@
 	font-size: 0.85rem;
 }
 
-.content pre{
+pre{
 	padding: 0.8em 0.8em;
-	max-height: 500px;
+	max-height: calc(100vh - 4em - 280px);
 }
 
 .section {
     padding: 1rem 1rem;
 }
-.actions {
+.actions, .actions-pre {
 	padding-bottom: 8px;
 	padding-top: 8px;
 }
@@ -37,3 +37,10 @@ button{
 
 .hidden { display: none; }
 
+.logo{
+	margin-bottom: 0;
+    font-size: 26px;
+    /* text-transform: uppercase; */
+    font-family: inherit;
+    font-weight: bold;
+}

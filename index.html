@@ -57,7 +57,10 @@
 			});
 
 			$("#input-clear").on('click', function () {
-				$("#input").val("");
+				var input = $("#input");
+				input.val("");
+				input.focus();
+				$('#magicWarning').empty();
 			});
 
 			$("#btn-clear-output").on('click', function () {

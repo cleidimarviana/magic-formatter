@@ -1,2 +1,3 @@
-# magic-formatter
-MagicFormatter  is the validator and reformatter tool for JSON.
+# MagicFormatter
+
+MagicFormatter is the validator and reformatter tool for JSON.
